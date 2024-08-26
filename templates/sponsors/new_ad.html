@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %} New Ad {% endblock %}
+{% block nav %}
+{% include "nav_sponsors.html" %}
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Create a New Ad</h1>
+    {% from "_formhelpers.html" import render_field %}
+    <div class="d-flex justify-content-center align-items-center">
+        <form method="post" action="{{ url_for('sponsors_app.new_ad') }}" enctype="multipart/form-data" role="form" class="w-50">
+            {{ form.hidden_tag() }}
+            {{ render_field(form.ad_name, class="form-control") }}
+            {{ render_field(form.amount, class="form-control") }}
+            {{ render_field(form.requirements, class="form-control") }}
+            {{ render_field(form.images, class="form-control") }}
+            <button type="submit" class="btn btn-primary mt-3">Create</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

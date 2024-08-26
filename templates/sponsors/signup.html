@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} signup {% endblock %}
+{% block nav %}
+{% include "nav.html" %}
+{% endblock %}
+{% block content %}
+{% from "_formhelpers.html" import render_field %}
+<div class="d-flex justify-content-center align-items-center" >
+   <form method="post" action="{{ url_for('sponsors_app.ssignup') }}" role="form" class="w-50" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ render_field(form.sponsor_name, class="form-control") }}
+    {{ render_field(form.email1, class='form-control') }}
+    {{ render_field(form.company_name, class='form-control') }}
+    {{ render_field(form.Industry, class='form-control') }}
+    {{ render_field(form.password, class='form-control') }}
+    {{ render_field(form.confirm_password, class='form-control') }}
+    {{ render_field(form.profile_pic, class='form-control') }}
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Signup</button>
+    </div>
+</form>
+</div>
+{% endblock %}

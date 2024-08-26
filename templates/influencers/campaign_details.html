@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+{% block nav %}
+{% include "nav_influencer.html" %}
+{% endblock %}
+{% block content %}
+<h3>Campaign details:</h3>
+<div>
+    {% if details %}
+    <h4>Campaign Name: {{details.campaign_name}}</h4>
+    <h4>Description: {{details.description}}</h4>
+    <h4>Start date: {{details.start_date}}</h4>
+    <h4>End date: {{details.end_date}}</h4>
+    <h4>Budget: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                </svg>{{details.budget}}</h4>
+    <h4>Visibility: {{details.visibility}}</h4>
+    <h4>Goals: {{details.goals}}</h4>
+    {% endif %}
+</div>
+{% if ads %}
+<h5>Your ads are:</h5>
+<div class="row">
+    {% for a in ads %}
+    <div class="col-md-3 mb-3">
+        <div class="card h-100" style="background-image: url('data:image/jpeg;base64,{{ pics[loop.index0] }}'); background-size: cover; background-position: center;">
+            <div class="card-body text-white" style="background-color: rgba(0, 0, 0, 0.5);">
+                <h5 class="card-title">{{ a.ad_name }}</h5>
+                <p class="card-text">Amount: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                </svg>{{ a.amount }}</p>
+                <form action="{{ url_for('influencers_app.aad_details') }}" method="POST" style="display: inline;">
+                    <input type="hidden" name="ad_id" value="{{ a.ad_id }}">
+                    <button type="submit" class="btn btn-primary">Details</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if loop.index % 4 == 0 %}
+</div>
+<div class="row">
+    {% endif %}
+    {% endfor %}
+</div>
+{% else %}
+<h5>No ads available</h5>
+{% endif %}
+{% endblock %}

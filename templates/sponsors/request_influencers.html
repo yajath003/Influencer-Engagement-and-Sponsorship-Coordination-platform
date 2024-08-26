@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %} Request Influencers {% endblock %}
+{% block nav %}
+{% include "nav_sponsors.html" %}
+{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h1>This page is for requesting the influencers:</h1>
+    {% if req %}
+    <form method="POST" action="{{ url_for('sponsors_app.request_influencers') }}">
+        <input type="hidden" name="ad_id" value="{{ ad_id }}">
+        {% for request in req %}
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="influencer_id" id="{{ request.influencer_id }}" value="{{ request.influencer_id }}">
+            <label class="form-check-label" for="{{ request.influencer_id }}">
+                {{ request.influencer_name }}
+            </label>
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary mt-3">Send Request</button>
+    </form>
+    {% else %}
+    <p>No influencers are currently available.</p>
+    {% endif %}
+</div>
+{% endblock %}

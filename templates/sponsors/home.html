@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %} profile {% endblock %}
+{% block nav %}
+{% include "nav_sponsors.html" %}
+{% endblock %}
+{% block content %}
+<div align="center">
+    {% if profile_pic %}
+    <img src="data:image/jpeg;base64,{{ profile_pic }}" alt="Profile Picture" height="200px" width="200px" class="round">
+{% endif %}
+{% if sponsor %}
+<h4>Sponsor: {{sponsor.sponsor_name}}</h4>
+<h4>Mail: {{sponsor.email}}</h4>
+<h4>Company Name: {{sponsor.company_name}}</h4>
+<h4>Industry: {{sponsor.Industry}}</h4>
+{% endif %}
+<a class="btn btn-primary" href="{{url_for('sponsors_app.rrequests')}}">Requests</a>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %} Signup {% endblock %}
+{% block nav %}
+{% include "nav.html" %}
+{% endblock %}
+{% block content %}
+{% from "_formhelpers.html" import render_field %}
+<div class="d-flex justify-content-center align-items-center" >
+  <form method="post" action="{{ url_for('influencers_app.signup')}}" enctype="multipart/form-data" role="form" class="w-50">
+    {{ form.hidden_tag() }}
+    {{ render_field(form.influencer_name, class='form-control') }}
+    {{ render_field(form.email, class='form-control') }}
+    {{ render_field(form.password, class='form-control') }}
+    {{ render_field(form.confirm_password, class='form-control') }}
+    {{ render_field(form.category, class='form-control') }}
+    {{ render_field(form.Instagram, class='form-control') }}
+    {{ render_field(form.twitter, class='form-control') }}
+    {{ render_field(form.youtube, class='form-control') }}
+    {{ render_field(form.profile_pic, class='form-control') }}
+      <div align="center">
+          <button type="submit" class="btn btn-primary mt-3">Signup</button>
+      </div>
+  </form>
+</div>
+{% endblock %}

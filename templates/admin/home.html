@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+{% block nav %}
+{% include "nav.html" %}
+{% endblock %}
+{% block content %}
+<a class="btn btn-primary" role="button" href="{{url_for('admin_app.flag')}}">Flag</a>
+<a class="btn btn-primary" role="button" href="{{url_for('admin_app.unflag')}}">UnFlag</a>
+<div>
+    <img src="data:image/png;base64,{{ plot_url }}" alt="Pie Chart", height="500", width="500">
+    <img src="data:image/png;base64,{{ plot_url1 }}" alt="Pie Chart", height="500", width="500" align="right">
+</div>
+<div>
+    <h2>Influencers:</h2>
+    {% if influencers_table %}
+    <table align="center" width="80%" class="table table-striped">
+        <tr>
+            <th>
+                Influencer
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+        {% for a in influencers_table %}
+        <tr>
+            <td>
+                {{ a[0] }}
+            </td>
+            <td>
+                {{ a[1] }}
+            </td>
+            <td>
+                {{ a[2] }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <h4>No influencers available</h4>
+    {% endif %}
+</div>
+<div>
+    <h2>Sponsors:</h2>
+    {% if sponsors_table %}
+    <table align="center" width="80%" class="table table-striped">
+        <tr>
+            <th>
+                Sponsor
+            </th>
+            <th>
+                Company
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+        {% for a in sponsors_table %}
+        <tr>
+            <td>
+                {{ a[0] }}
+            </td>
+             <td>
+                {{ a[1] }}
+            </td>
+             <td>
+                {{ a[2] }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <h4>No sponsor available</h4>
+    {% endif %}
+</div>
+{% endblock %}

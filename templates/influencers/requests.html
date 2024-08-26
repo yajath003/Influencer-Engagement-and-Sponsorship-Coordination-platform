@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Requests{% endblock %}
+{% block nav %}
+{% include "nav_influencer.html" %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% if req %}
+    <form method="POST" action="{{ url_for('influencers_app.requests') }}">
+        <h3>Requests:</h3>
+        <div class="row">
+            {% for request in req %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100" style="background-image: url('data:image/jpeg;base64,{{ profile_pic1[loop.index0] }}'); background-size: cover; background-position: center;">
+                    <div class="card-body text-white" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="selected_requests" value="{{ request.ad_id }}">
+                            <label class="form-check-label">
+                                <div class="campaign-info">
+                                    <h5 class="card-title">{{ request.ad_name }}</h5>
+                                    <p class="card-text">Amount: {{ request.amount }}</p>
+                                    <a class="btn btn-primary" href="{{ url_for('influencers_app.aad_details', ad_id=request.ad_id) }}">Details</a>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if loop.index % 3 == 0 and not loop.last %}
+        </div>
+        <div class="row">
+            {% endif %}
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Accept Selected</button>
+    </form>
+    {% else %}
+    <p>No current requests.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+{% block nav %}
+{% include "nav.html" %}
+{% endblock %}
+{% block content %}
+<form method="POST" action="{{ url_for('admin_app.flag') }}">
+    <h2>Flag Influencers</h2>
+    {% if influencers %}
+        <ul>
+            {% for inf in influencers %}
+                <li>
+                    <input type="checkbox" name="inf" value="{{ inf.influencer_name }}">
+                    {{ inf.influencer_name }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h2>Flag Sponsors</h2>
+    {% if sponsors %}
+        <ul>
+            {% for spon in sponsors %}
+                <li>
+                    <input type="checkbox" name="spon" value="{{ spon.sponsor_name }}">
+                    {{ spon.sponsor_name }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <button type="submit" class="btn btn-danger">Flag Selected</button>
+</form>
+{% endblock %}

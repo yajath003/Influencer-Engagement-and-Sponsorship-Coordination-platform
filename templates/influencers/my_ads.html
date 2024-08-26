@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}My Ads{% endblock %}
+{% block nav %}
+{% include "nav_influencer.html" %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% if my_ads %}
+    <form method="POST" action="{{ url_for('influencers_app.my_ads') }}">
+        <h3>Your Ads:</h3>
+        <div class="row">
+            {% for a in my_ads %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100" style="background-image: url('data:image/jpeg;base64,{{ arr2[loop.index0] }}'); background-size: cover; background-position: center; height: 200px; background-color: rgba(255, 255, 255, 0.5);">
+                    <div class="card-body text-white" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="selected_requests" value="{{ a.ad_name }}">
+                            <label class="form-check-label">
+                                <div class="campaign-info">
+                                    <h5 class="card-title">{{ a.ad_name }}</h5>
+                                    <p class="card-text">Amount: {{ a.amount }}</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Completed</button>
+    </form>
+    {% else %}
+    <h4>You have no ads</h4>
+    {% endif %}
+</div>
+{% endblock %}

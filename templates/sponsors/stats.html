@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Stats{% endblock %}
+{% block nav %}
+{% include "nav_sponsors.html" %}
+{% endblock %}
+{% block content %}
+    <h1>Statistics</h1>
+    {% if data_list %}
+        <table class="table table-bordered" border="2px">
+            <thead>
+                <tr>
+                    <th>Ad Name</th>
+                    <th>Campaign Name</th>
+                    <th>Influencer Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ad_name, campaign_name, influencer_name, status in data_list %}
+                <tr>
+                    <td>{{ ad_name }}</td>
+                    <td>{{ campaign_name }}</td>
+                    <td>{{ influencer_name }}</td>
+                    <td>{{ status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No accepted ads available.</p>
+    {% endif %}
+{% endblock %}

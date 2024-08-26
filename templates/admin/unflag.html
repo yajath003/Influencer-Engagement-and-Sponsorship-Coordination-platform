@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+{% block nav %}
+{% include "nav.html" %}
+{% endblock %}
+{% block content %}
+<form method="POST" action="{{ url_for('admin_app.unflag') }}">
+    <h2>UnFlag Influencers</h2>
+    {% if influencers %}
+        <ul>
+            {% for inf in influencers %}
+                <li>
+                    <input type="checkbox" name="inf" value="{{ inf.influencer_name }}">
+                    {{ inf.influencer_name }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <h3>No flagged influencers available</h3>
+    {% endif %}
+    <h2>UnFlag Sponsors</h2>
+    {% if sponsors %}
+        <ul>
+            {% for spon in sponsors %}
+                <li>
+                    <input type="checkbox" name="spon" value="{{ spon.sponsor_name }}">
+                    {{ spon.sponsor_name }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <h3>no flagged sponsors available</h3>
+    {% endif %}
+    <button type="submit" class="btn btn-danger">UnFlag Selected</button>
+</form>
+{% endblock %}

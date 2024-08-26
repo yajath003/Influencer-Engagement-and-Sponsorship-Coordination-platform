@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Ad Details{% endblock %}
+{% block nav %}
+    {% include "nav_influencer.html" %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Ad details:</h1>
+    {% if profile_pic %}
+        <img src="data:image/jpeg;base64,{{ profile_pic }}" alt="Profile Picture" height="200px" width="200px" class="round">
+    {% endif %}
+    <div>
+        {% if details %}
+            <h4>Ad Name: {{ details.ad_name }}</h4>
+            <h4>Amount: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                </svg>{{ details.amount }}</h4>
+            <h4>Requirements: {{ details.requirements }}</h4>
+            <h4>Status: {{ details.status }}</h4>
+        {% else %}
+            <p>No ad details available.</p>
+        {% endif %}
+        <form method="post">
+            <input type="hidden" name="ad_id" value="{{ details.ad_id }}">
+            <button class="btn btn-primary" name="something" value="something">Request</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} New Campaign {% endblock %}
+{% block nav %}
+{% include "nav_sponsors.html" %}
+{% endblock %}
+{% block content %}
+<P><h1>New Campaign:</h1>
+{% from "_formhelpers.html" import render_field %}
+<div class="d-flex justify-content-center align-items-center" >
+<form method="post" action="{{ url_for('sponsors_app.new_campaign')}}" role="form" class="w-50">
+    {{ form.hidden_tag() }}
+    {{ render_field(form.campaign_name, class = "form-control")}}
+    {{ render_field(form.description, class = "form-control")}}
+    {{ render_field(form.start_date, class = "form-control")}}
+    {{ render_field(form.end_date, class = "form-control")}}
+    {{ render_field(form.budget, class = "form-control")}}
+    {{ render_field(form.visibility, class = "form-control")}}
+    {{ render_field(form.goals, class = "form-control")}}
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Delete ads{% endblock %}
+{% block nav %}
+{% include "nav_sponsors.html" %}
+{% endblock %}
+{% block content %}
+<h2>Delete Ads</h2>
+<form method="POST" action="{{ url_for('sponsors_app.dlt_ad') }}">
+    {% if advertisements %}
+        <ul>
+            {% for ad in advertisements %}
+                {% for a in ad %}
+                <li>
+                    <input type="checkbox" name="ad_ids" value="{{ a.ad_id }}">
+                    {{ a.ad_name }}
+                </li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+        <button type="submit" class="btn btn-danger">Delete Selected</button>
+    {% else %}
+        <h3>No ads available to delete</h3>
+    {% endif %}
+</form>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %} Stats {% endblock %}
+{% block nav %}
+{% include "nav_influencer.html" %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% if amount %}
+    <h3>Your earnings: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                </svg>{{ amount }}</h3>
+    {% endif %}
+
+    <h3>Your Ads:</h3>
+    {% if first %}
+        <div class="row">
+            {% for ad in first %}
+                {% for a in ad %}
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100" style="background-image: url('data:image/jpeg;base64,{{ arr1[loop.index0] }}'); background-size: cover; background-position: center; height: 200px; background-color: rgba(255, 255, 255, 0.5);">
+                        <div class="card-body text-white" style="background-color: rgba(0, 0, 0, 0.5);">
+                            <h5 class="card-title">{{ a.ad_name }}</h5>
+                            <p class="card-text">Amount: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                </svg>{{ a.amount }}</p>
+                            <form action="{{ url_for('influencers_app.aad_details') }}" method="POST" style="display: inline;">
+                                <input type="hidden" name="ad_id" value="{{ a.ad_id }}">
+                                <button type="submit" class="btn btn-primary">Details</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <h5>You have accepted no ads</h5>
+    {% endif %}
+
+    <h3>Your Completed Ads:</h3>
+    {% if combined_completed %}
+        <div class="row">
+            {% for ad, campaign_name in combined_completed %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100" style="background-image: url('data:image/jpeg;base64,{{ arr2[loop.index0] }}'); background-size: cover; background-position: center; height: 200px; background-color: rgba(255, 255, 255, 0.5);">
+                    <div class="card-body text-white" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <h5 class="card-title">{{ ad.ad_name }}</h5>
+                        <p class="card-text">Amount: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                </svg>{{ ad.amount }} &nbsp; ({{ campaign_name }})</p>
+                        <form action="{{ url_for('influencers_app.aad_details') }}" method="POST" style="display: inline;">
+                            <input type="hidden" name="ad_id" value="{{ ad.ad_id }}">
+                            <button type="submit" class="btn btn-primary">Details</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h5>You have not completed any ads</h5>
+    {% endif %}
+</div>
+{% endblock %}
