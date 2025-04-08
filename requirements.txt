@@ -127,3 +127,4 @@ widgetsnbextension==4.0.10
 WTForms==3.0.1
 WTForms-SQLAlchemy==0.3
 zipp==3.10.0
+gunicorn
