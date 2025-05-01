@@ -51,10 +51,7 @@ Each module is further structured into three Python files:
 - Fullscreen mode
 - Cross platform
 
-## project is live under:
-```bash
-  https://influencer-engagement-and-sponsorship-unin.onrender.com
-```
+## project is live [HERE](https://influencer-engagement-and-sponsorship-unin.onrender.com).
 ## Run Locally
 
 Clone the project
