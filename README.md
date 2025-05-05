@@ -79,4 +79,18 @@ Start the Server
 ```
 
 ## Screenshots
-
+**Home page**\
+![](images/home.png)
+**Influencer dashboard**\
+![](images/influencer_dash.png)
+**Search**\
+![](images/search.png)
+**Influencer statistics**\
+![](images/inf_stat.png)
+**Campaigns**\
+![](images/camp.png)
+**Sponsors statistics**\
+![](images/spon_stat.png)
+**Admin dashboard**\
+![](images/admin.png)
+![](images/members.png)
